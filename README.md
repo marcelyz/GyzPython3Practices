@@ -1,1 +1,1 @@
-# gyz_python3_practices
+# Gyz Python3 Practices
