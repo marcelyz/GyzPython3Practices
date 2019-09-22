@@ -1,6 +1,9 @@
 import copy
+import random
+
+
 class Solution:
-    def quick_sort(self,nums,lo,hi):
+    def quick_sort(self, nums, lo, hi):
         """
         :param nums:list[int]
         :param lo: int, low,0
@@ -9,11 +12,13 @@ class Solution:
         分治和递归
         """
         if lo < hi:
-            p = self.partition(nums,lo,hi)
-            self.quick_sort(nums,lo,p)
-            self.quick_sort(nums,p+1,hi)
+            p = self.partition(nums, lo, hi)
+            self.quick_sort(nums, lo, p)
+            self.quick_sort(nums, p+1, hi)
             return
-    def partition(self,nums,lo,hi):
+
+    @staticmethod
+    def partition(nums, lo, hi):
         """
         :param nums:list
         :param lo: int, low
@@ -22,14 +27,14 @@ class Solution:
         """
         i = lo - 1
         pivot = nums[hi-1]
-        for j in range(lo,hi):
+        for j in range(lo, hi):
             if nums[j] < pivot:
                 i += 1
-                nums[i],nums[j] = nums[j],nums[i]
-        nums[i+1],nums[hi-1] = nums[hi-1],nums[i+1]
+                nums[i], nums[j] = nums[j], nums[i]
+        nums[i+1], nums[hi-1] = nums[hi-1], nums[i+1]
         return i+1
 
-    def merge_sort(self,nums):
+    def merge_sort(self, nums):
         """
         :param nums: list[int]
         :return: list[int]
@@ -42,8 +47,10 @@ class Solution:
             middle = length // 2
             left = self.merge_sort(nums[:middle])
             right = self.merge_sort(nums[middle:])
-            return self.merged(left,right)
-    def merged(self,left,right):
+            return self.merged(left, right)
+
+    @staticmethod
+    def merged(left, right):
         """
         :param left: list[int]
         :param right: list[int]
@@ -60,7 +67,8 @@ class Solution:
         merged.extend(right)
         return merged
 
-    def max_sub_array(self,nums):
+    @staticmethod
+    def max_sub_array(nums):
         """
         :param nums:List[int]
         :return: int, List[int]
@@ -70,27 +78,31 @@ class Solution:
         if length == 1 or length == 0:
             return sum(nums), nums
         else:
-            max_sum = 0;this_sum = 0
-            max_sum_array = [];this_sum_array = []
+            max_sum = 0
+            this_sum = 0
+            max_sum_array = []
+            this_sum_array = []
             for i in range(length):
                 this_sum += nums[i]
                 this_sum_array.append(nums[i])
                 if this_sum > max_sum:
                     max_sum = this_sum
-                    max_sum_array = copy.deepcopy(this_sum_array)#要用深拷贝，不然maxArray会随着thisArray的变化而变化
+                    max_sum_array = copy.deepcopy(this_sum_array)  # 要用深拷贝，不然maxArray会随着thisArray的变化而变化
                 elif this_sum < 0:
                     this_sum = 0
                     this_sum_array = []
                 else:
                     continue
-        if max_sum == 0:#如果数组里全是负数和0的话，是另外一种做法
+        if max_sum == 0:  # 如果数组里全是负数和0的话，是另外一种做法
             return max(nums), [max(nums)]
         else:
-            return max_sum,max_sum_array
+            return max_sum, max_sum_array
 
-    def find_median_sorted_arrays(self, nums1, nums2):
+    @staticmethod
+    def find_median_sorted_arrays(nums1, nums2):
         """
-        :type nums1,nums2: List[int]
+        :type nums1: List[int]
+        :type nums2: List[int]
         :rtype: int/float
         二分法：O(log(min(m,n)))
         """
@@ -123,7 +135,8 @@ class Solution:
                     min_of_right = min(nums1[i], nums2[j])
                 return (max_of_left + min_of_right) / 2.0
 
-    def find_seconde_max_num(self, nums):
+    @staticmethod
+    def find_second_max_num(nums):
         if len(nums) < 2:
             return None
         if nums[0] < nums[1]:
@@ -145,7 +158,8 @@ class Solution:
                     continue
         return second_max_num
 
-    def house_rob(self, nums):
+    @staticmethod
+    def house_rob(nums):
         rob, no_rob, rob1, no_rob1 = 0, 0, 0, 0
         for num in nums:
             rob1 = num + no_rob
@@ -153,36 +167,85 @@ class Solution:
             rob, no_rob = rob1, no_rob1
         return max(rob, no_rob)
 
-    def two_sum(self, nums, target):
-        result = []
+    @staticmethod
+    def two_sum(nums, target):
+        t_result = []
         nums_index_dict = {}
         for i in range(len(nums)):
             if target-nums[i] in nums_index_dict:
-                result.append((target-nums[i], nums[i]))
+                t_result.append((target-nums[i], nums[i]))
             nums_index_dict[nums[i]] = i
-        return result
+        return t_result
 
-# nums = [-2,1,-3,4,-1,2,1,-5,4]
-# print(Solution().max_sub_array(nums))
+    @staticmethod
+    def find_nums_min_and_max(nums):  # O(1.5N)
+        """
+        :param nums: list(int)
+        :return: list(min, max)
+        双元素法: 1.5N次比较
+        """
+        size = len(nums)
+        if size == 0:
+            return list()
+        elif size == 1:
+            return [nums[0], nums[0]]
+        elif size == 2:
+            return [nums[0], nums[1]] if nums[0] < nums[1] else [nums[1], nums[0]]
+        else:
+            t_max = t_min = nums[0]
+            i = 1
+            j = size - 1
+            while i <= j:
+                if nums[i] > nums[j]:
+                    if nums[i] > t_max:
+                        t_max = nums[i]
+                    if nums[j] < t_min:
+                        t_min = nums[j]
+                    i += 1
+                    j -= 1
+                else:
+                    if nums[i] < t_min:
+                        t_min = nums[i]
+                    if nums[j] > t_max:
+                        t_max = nums[j]
+                    i += 1
+                    j -= 1
+            return [t_min, t_max]
 
-# Solution().quick_sort(nums,0,len(nums))
-# print(nums)
 
-# print(Solution().merge_sort(nums))
+if __name__ == "__main__":
+    nums_test1 = random.sample(range(-5, 5), 10)
+    nums_test2 = random.sample(range(-5, 5), 8)
+    print("nums_test1:", nums_test1)
+    print("nums_test2:", nums_test2)
 
-nums1 = [0,1, 2, 3]
-nums2 = [4,5,6,7,8,9]
-result = Solution().find_median_sorted_arrays(nums1,nums2)
-print(result)
+    # # 最大子列和
+    # print("max_sub_array:", Solution().max_sub_array(nums_test1))
+    #
+    # # 快速排序
+    # Solution().quick_sort(nums_test1, 0, len(nums_test1))
+    # print("quick_sort:", nums_test1)
+    #
+    # # 归并排序
+    # print("merge_sort:", Solution().merge_sort(nums_test1))
+    #
+    # # 两个有序数组的中位数
+    # num_median = Solution().find_median_sorted_arrays(nums_test1, nums_test2)
+    # print("median of two sorted arrays:", num_median)
+    #
+    # # 数组中第二大的数
+    # num_second_max = Solution().find_second_max_num(nums_test1)
+    # print("num_second_max", num_second_max)
+    #
+    # # 抢房子
+    # house_rob_result = Solution().house_rob(nums_test1)
+    # print("house_rob_result", house_rob_result)
+    #
+    # # two sum
+    # target_sum = 5
+    # two_sum_result = Solution().two_sum(nums_test1, target_sum)
+    # print("two_sum_result", two_sum_result)
 
-# nums = [1,2,3,4,5,-1]
-# result = Solution().find_seconde_max_num(nums)
-# print(result)
-
-# nums = [1,2,3,4,5,-1]
-# result = Solution().house_rob(nums)
-# print(result)
-
-# nums = [1,2,3,4,5,-1]
-# result = Solution().two_sum(nums,5)
-# print(result)
+    # 数组中的最大值最小值，1.5N次比较
+    min_max = Solution().find_nums_min_and_max(nums_test1)
+    print("find_nums_min_and_max:", min_max)
