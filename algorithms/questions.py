@@ -212,12 +212,41 @@ class Solution:
                     j -= 1
             return [t_min, t_max]
 
+    @staticmethod
+    def stock_max_profit(prices):
+        """
+        :param prices:[(date,price),(),()...]
+        :return: [buy_date, sell_date, max_profit]
+        """
+        size = len(prices)
+        if size == 0:
+            return list()
+        elif size == 1:
+            return [prices[0][0], prices[0][0], prices[0][1]]
+        else:
+            min_price = prices[0][1]
+            min_date = prices[0][0]
+            max_profit = 0
+            buy_date = prices[0][0]
+            sell_date = prices[0][0]
+            for data in prices[1:]:
+                if data[1] - min_price > max_profit:
+                    max_profit = data[1] - min_price
+                    buy_date = min_date
+                    sell_date = data[0]
+                if data[1] < min_price:
+                    min_price = data[1]
+                    min_date = data[0]
+            return [buy_date, sell_date, max_profit]
+
+
+
 
 if __name__ == "__main__":
-    nums_test1 = random.sample(range(-5, 5), 10)
-    nums_test2 = random.sample(range(-5, 5), 8)
-    print("nums_test1:", nums_test1)
-    print("nums_test2:", nums_test2)
+    # nums_test1 = random.sample(range(-5, 5), 10)
+    # nums_test2 = random.sample(range(-5, 5), 8)
+    # print("nums_test1:", nums_test1)
+    # print("nums_test2:", nums_test2)
 
     # # 最大子列和
     # print("max_sub_array:", Solution().max_sub_array(nums_test1))
@@ -247,5 +276,9 @@ if __name__ == "__main__":
     # print("two_sum_result", two_sum_result)
 
     # 数组中的最大值最小值，1.5N次比较
-    min_max = Solution().find_nums_min_and_max(nums_test1)
-    print("find_nums_min_and_max:", min_max)
+    # min_max = Solution().find_nums_min_and_max(nums_test1)
+    # print("find_nums_min_and_max:", min_max)
+
+    #股票利益最大化问题
+    stocks = [("2019-07-01", 1), ("2019-07-02", 3), ("2019-07-04", 5), ("2019-07-05", 1), ("2019-07-09", 10)]
+    print(Solution().stock_max_profit(stocks))
