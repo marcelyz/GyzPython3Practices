@@ -239,6 +239,10 @@ class Solution:
                     min_date = data[0]
             return [buy_date, sell_date, max_profit]
 
+    @staticmethod
+    def test():
+        print("hello vs code")
+
 
 
 
@@ -282,3 +286,5 @@ if __name__ == "__main__":
     #股票利益最大化问题
     stocks = [("2019-07-01", 1), ("2019-07-02", 3), ("2019-07-04", 5), ("2019-07-05", 1), ("2019-07-09", 10)]
     print(Solution().stock_max_profit(stocks))
+
+    Solution().test()
