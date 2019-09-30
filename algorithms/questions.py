@@ -239,9 +239,20 @@ class Solution:
                     min_date = data[0]
             return [buy_date, sell_date, max_profit]
 
+    # todo
     @staticmethod
-    def test():
-        print("hello vs code")
+    def minWindow(s_string, t_string):
+        if t_string not in s_string:
+            assert t_string not in s_string
+        else:
+            left = 0
+            right = len(s_string)
+            while left < right:
+                if t_string in s_string[left+1:right]:
+                    left += 1
+                if t_string in s_string[left:right-1]:
+                    right -= 1
+            return s_string[left:right]
 
 
 
@@ -252,29 +263,29 @@ if __name__ == "__main__":
     # print("nums_test1:", nums_test1)
     # print("nums_test2:", nums_test2)
 
-    # # 最大子列和
+    # 最大子列和
     # print("max_sub_array:", Solution().max_sub_array(nums_test1))
     #
-    # # 快速排序
+    # 快速排序
     # Solution().quick_sort(nums_test1, 0, len(nums_test1))
     # print("quick_sort:", nums_test1)
     #
-    # # 归并排序
+    # 归并排序
     # print("merge_sort:", Solution().merge_sort(nums_test1))
     #
-    # # 两个有序数组的中位数
+    # 两个有序数组的中位数
     # num_median = Solution().find_median_sorted_arrays(nums_test1, nums_test2)
     # print("median of two sorted arrays:", num_median)
     #
-    # # 数组中第二大的数
+    # 数组中第二大的数
     # num_second_max = Solution().find_second_max_num(nums_test1)
     # print("num_second_max", num_second_max)
     #
-    # # 抢房子
+    # 抢房子
     # house_rob_result = Solution().house_rob(nums_test1)
     # print("house_rob_result", house_rob_result)
     #
-    # # two sum
+    # two sum
     # target_sum = 5
     # two_sum_result = Solution().two_sum(nums_test1, target_sum)
     # print("two_sum_result", two_sum_result)
@@ -283,8 +294,12 @@ if __name__ == "__main__":
     # min_max = Solution().find_nums_min_and_max(nums_test1)
     # print("find_nums_min_and_max:", min_max)
 
-    #股票利益最大化问题
-    stocks = [("2019-07-01", 1), ("2019-07-02", 3), ("2019-07-04", 5), ("2019-07-05", 1), ("2019-07-09", 10)]
-    print(Solution().stock_max_profit(stocks))
+    # 股票利益最大化问题
+    # stocks = [("2019-07-01", 1), ("2019-07-02", 3), ("2019-07-04", 5), ("2019-07-05", 1), ("2019-07-09", 10)]
+    # print(Solution().stock_max_profit(stocks))
 
-    Solution().test()
+    # 最小覆盖子串（双指针+滑动窗口）
+    S = "ADOBECODEBANC"
+    T = "ABC"
+    print(Solution().minWindow(S, T))
+
