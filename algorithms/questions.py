@@ -241,7 +241,7 @@ class Solution:
 
     # todo
     @staticmethod
-    def minWindow(s_string, t_string):
+    def min_window(s_string, t_string):
         if t_string not in s_string:
             assert t_string not in s_string
         else:
@@ -255,13 +255,11 @@ class Solution:
             return s_string[left:right]
 
 
-
-
 if __name__ == "__main__":
-    # nums_test1 = random.sample(range(-5, 5), 10)
-    # nums_test2 = random.sample(range(-5, 5), 8)
-    # print("nums_test1:", nums_test1)
-    # print("nums_test2:", nums_test2)
+    nums_test1 = random.sample(range(-5, 5), 10)
+    nums_test2 = random.sample(range(-5, 5), 8)
+    print("nums_test1:", nums_test1)
+    print("nums_test2:", nums_test2)
 
     # 最大子列和
     # print("max_sub_array:", Solution().max_sub_array(nums_test1))
@@ -301,5 +299,5 @@ if __name__ == "__main__":
     # 最小覆盖子串（双指针+滑动窗口）
     S = "ADOBECODEBANC"
     T = "ABC"
-    print(Solution().minWindow(S, T))
+    print(Solution().min_window(S, T))
 
