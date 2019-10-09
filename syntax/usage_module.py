@@ -1,4 +1,4 @@
-from collections import defaultdict, Counter
+from collections import defaultdict, OrderedDict, Counter, namedtuple, deque
 
 
 def get_count(sequence):
@@ -26,13 +26,33 @@ if __name__ == "__main__":
     # defaultdict的应用，不用考虑key不存在的情况，代码更简洁
     strs = ['a', 'b', 'a', 'c', 'a', 'c', 'a', 'd']
     print(get_count(strs))
-    print(get_count2(strs))
+    dd = get_count2(strs)
+    print(dd)
+    print(isinstance(dd, defaultdict), isinstance(dd, dict))  # defaultdict是dict的一个子类
+
+    # OrderedDict:有序dict
+    od = OrderedDict([('a', 1), ('b', 2), ('c', 3)])
+    print(od)
+    print(isinstance(od, OrderedDict), isinstance(od, dict))  # OrderedDict是dict的一个子类
 
     # Counter的应用，不用自己对字典排序，代码更简洁
-    letter_count_dcit = Counter(strs)
+    letter_count_dict = Counter(strs)
+    print(isinstance(letter_count_dict, Counter), isinstance(letter_count_dict, dict))  # Counter是dict的一个子类
     strs_count_dict = get_count2(strs)
     print(top_counts(strs_count_dict, 2))
-    print(letter_count_dcit.most_common(2))
+    print(letter_count_dict.most_common(2))
 
+    # namedtuple具备tuple的不变性，又可以根据属性来引用
+    Point = namedtuple('Circle', ['x', 'y', 'r'])
+    p = Point(1, 2, 5)
+    print(p.x, p.y, p.r)
+    print(isinstance(p, Point), isinstance(p, tuple))  # namedtuple是tuple的一个子类
 
-
+    # deque：高效实现插入和删除操作的双向列表; list线性存储，访问快，插入和删除效率低
+    q = deque(['a', 'b', 'c'])
+    q.append('x')
+    q.appendleft('y')
+    print(q)
+    q.popleft()
+    q.pop()
+    print(q)
