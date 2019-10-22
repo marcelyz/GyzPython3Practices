@@ -27,12 +27,10 @@ if __name__ == "__main__":
     print("=" * 45)
     use_logging(bar)
 
-
     # use_logging就是装饰器，把执行真正业务方法的func包裹在函数里面
     bar = _use_logging(bar)
     print("=" * 45)
     bar()
-
 
     # @语法糖：在定义函数的时候使用，避免再一次赋值操作，省去bar=use_logging(bar)
     @_use_logging
