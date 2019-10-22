@@ -239,7 +239,7 @@ class Solution:
                     min_date = data[0]
             return [buy_date, sell_date, max_profit]
 
-    # todo
+    # todo 不完善
     @staticmethod
     def min_window(s_string, t_string):
         if t_string not in s_string:
