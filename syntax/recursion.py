@@ -9,30 +9,30 @@ class BinaryTree:
 
 
 # 二叉树的递归遍历
-def preorder(root):
+def preorder_recursion(root):
     # 先序遍历
     if root:
         print(root.val)
-        preorder(root.left)
-        preorder(root.right)
+        preorder_recursion(root.left)
+        preorder_recursion(root.right)
 
 
-def inorder(root):
+def inorder_recursion(root):
     # 中序遍历
     if root:
-        inorder(root.left)
+        inorder_recursion(root.left)
         print(root.val)
-        inorder(root.right)
+        inorder_recursion(root.right)
 
 
-def postorder(root):
+def postorder_recursion(root):
     # 后序遍历
     if root:
-        postorder(root.left)
-        postorder(root.right)
+        postorder_recursion(root.left)
+        postorder_recursion(root.right)
         print(root.val)
 
-# 栈遍历
+# 二叉树的栈遍历
 
 
 def list_sum(nums):
@@ -51,11 +51,11 @@ if __name__ == "__main__":
     root_test.right = BinaryTree(3)
     root_test.left.left = BinaryTree(4)
     root_test.left.right = BinaryTree(5)
-    print("Preorder traversal of binary tree is")
-    preorder(root_test)
+    print("preorder_recursion traversal of binary tree is")
+    preorder_recursion(root_test)
 
-    print("Inorder traversal of binary tree is")
-    inorder(root_test)
+    print("inorder_recursion traversal of binary tree is")
+    inorder_recursion(root_test)
 
-    print("Postorder traversal of binary tree is")
-    postorder(root_test)
+    print("postorder_recursion traversal of binary tree is")
+    postorder_recursion(root_test)
