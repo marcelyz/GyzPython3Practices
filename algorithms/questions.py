@@ -254,6 +254,10 @@ class Solution:
                     right -= 1
             return s_string[left:right]
 
+    @staticmethod
+    def is_binary_search_tree(root):
+        pass
+
 
 if __name__ == "__main__":
     nums_test1 = random.sample(range(-5, 5), 10)
@@ -288,11 +292,11 @@ if __name__ == "__main__":
     # two_sum_result = Solution().two_sum(nums_test1, target_sum)
     # print("two_sum_result", two_sum_result)
 
-    # 数组中的最大值最小值，1.5N次比较
+    # 数组中的最大值最小值，1.5N次比较(新氧)
     # min_max = Solution().find_nums_min_and_max(nums_test1)
     # print("find_nums_min_and_max:", min_max)
 
-    # 股票利益最大化问题
+    # 股票利益最大化问题(新氧)
     # stocks = [("2019-07-01", 1), ("2019-07-02", 3), ("2019-07-04", 5), ("2019-07-05", 1), ("2019-07-09", 10)]
     # print(Solution().stock_max_profit(stocks))
 
@@ -300,4 +304,7 @@ if __name__ == "__main__":
     S = "ADOBECODEBANC"
     T = "ABC"
     print(Solution().min_window(S, T))
+
+    # 二叉排序树(zhihu)
+    pass
 
