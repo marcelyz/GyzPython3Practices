@@ -305,6 +305,6 @@ if __name__ == "__main__":
     T = "ABC"
     print(Solution().min_window(S, T))
 
-    # 二叉排序树(zhihu)
+    # 二叉搜索树(zhihu)
     pass
 
