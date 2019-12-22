@@ -305,6 +305,17 @@ class Solution:
         # 先升序后降序数组
         pass
 
+    @staticmethod
+    def find_index_for_abs1(nums, target):
+        lo = 0
+        hi = len(nums) - 1
+        while lo <= hi:
+            if nums[lo] == target:
+                return lo
+            else:
+                lo = lo + abs(target-nums[lo])  # 可以跳过的距离
+        return -1
+
 
 if __name__ == "__main__":
     # nums_test1 = random.sample(range(-5, 5), 10)
@@ -366,3 +377,8 @@ if __name__ == "__main__":
     # 先升序后降序数组二分查找
     # nums_test = [3, 5, 7, 8, 4, 2, 1]
     # print(Solution().binary_search_for_half_sequence2(nums_test, 8))
+
+    # 在相邻元素绝对值为1的数组查找元素index
+    nums_test = [4, 3, 2, 1, 2, 3, 4, 5, 6, 7]
+    print(Solution().find_index_for_abs1(nums_test, 5))
+
