@@ -318,7 +318,21 @@ class Solution:
 
     @staticmethod
     def sort_colors(nums):
-        pass
+        pivot = 1
+        lo = -1
+        current = 0
+        hi = len(nums)
+        while current < hi:
+            if nums[current] == pivot:
+                current += 1
+            elif nums[current] < pivot:
+                lo += 1
+                nums[lo], nums[current] = nums[current], nums[lo]
+                current += 1
+            elif nums[current] > pivot:
+                hi -= 1
+                nums[hi], nums[current] = nums[current], nums[hi]
+        return nums
 
 
 if __name__ == "__main__":
@@ -386,6 +400,6 @@ if __name__ == "__main__":
     # nums_test = [4, 3, 2, 1, 2, 3, 4, 5, 6, 7]
     # print(Solution().find_index_for_abs1(nums_test, 5))
 
-    # 荷兰国旗问题
-    # nums_test = [2, 0, 2, 1, 1, 0]
-    # print(Solution().sort_colors(nums_test))
+    # 荷兰国旗问题(快排思想)
+    nums_test = [2, 0, 2, 1, 1, 0]
+    print(Solution().sort_colors(nums_test))
