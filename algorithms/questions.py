@@ -359,7 +359,7 @@ if __name__ == "__main__":
     # nums_test = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     # print(Solution().binary_search(nums_test, 6))
 
-    # 半有序数组二分查找
+    # 半有序数组二分查找(metaapp)
     # nums_test = [6, 7, 8, 9, 1, 2, 3, 4, 5]
     # print(Solution().binary_search_for_half_sequence(nums_test, 8))
 
