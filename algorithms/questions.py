@@ -258,12 +258,59 @@ class Solution:
     def is_binary_search_tree(root):
         pass
 
+    @staticmethod
+    def binary_search(nums, target):
+        # 有序数组
+        lo = 0
+        hi = len(nums) - 1
+        while lo <= hi:
+            mid = (lo + hi) // 2
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] > target:
+                hi = mid - 1
+            else:
+                lo = mid + 1
+        return -1
+
+    @staticmethod
+    def binary_search_for_half_sequence(nums, target):
+        # 两段合并有序数组
+        # 二分之后找到有序的一半，将这部分与target进行比较
+        lo = 0
+        hi = len(nums) - 1
+        while lo <= hi:
+            mid = (lo + hi) // 2
+            if nums[mid] == target:
+                return mid
+            else:
+                if nums[mid] > nums[lo]:  # [lo, mid]升序
+                    if nums[lo] == target:
+                        return lo
+                    elif nums[lo] < target < nums[mid]:
+                        hi = mid - 1
+                    else:
+                        lo = mid + 1
+                elif nums[mid] <= nums[lo]:  # [mid, hi]升序
+                    if target == nums[hi]:
+                        return hi
+                    elif nums[mid] < target < nums[hi]:
+                        lo = mid + 1
+                    else:
+                        hi = mid - 1
+        return -1
+
+    @staticmethod
+    def binary_search_for_half_sequence2(nums, target):
+        # 先升序后降序数组
+        pass
+
 
 if __name__ == "__main__":
-    nums_test1 = random.sample(range(-5, 5), 10)
-    nums_test2 = random.sample(range(-5, 5), 8)
-    print("nums_test1:", nums_test1)
-    print("nums_test2:", nums_test2)
+    # nums_test1 = random.sample(range(-5, 5), 10)
+    # nums_test2 = random.sample(range(-5, 5), 8)
+    # print("nums_test1:", nums_test1)
+    # print("nums_test2:", nums_test2)
 
     # 最大子列和
     # print("max_sub_array:", Solution().max_sub_array(nums_test1))
@@ -301,10 +348,21 @@ if __name__ == "__main__":
     # print(Solution().stock_max_profit(stocks))
 
     # 最小覆盖子串（双指针+滑动窗口）
-    S = "ADOBECODEBANC"
-    T = "ABC"
-    print(Solution().min_window(S, T))
+    # S = "ADOBECODEBANC"
+    # T = "ABC"
+    # print(Solution().min_window(S, T))
 
     # 二叉搜索树(zhihu)
-    pass
+    # pass
 
+    # 有序数组二分查找
+    # nums_test = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    # print(Solution().binary_search(nums_test, 6))
+
+    # 半有序数组二分查找
+    # nums_test = [6, 7, 8, 9, 1, 2, 3, 4, 5]
+    # print(Solution().binary_search_for_half_sequence(nums_test, 8))
+
+    # 先升序后降序数组二分查找
+    # nums_test = [3, 5, 7, 8, 4, 2, 1]
+    # print(Solution().binary_search_for_half_sequence2(nums_test, 8))
