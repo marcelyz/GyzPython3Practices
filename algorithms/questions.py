@@ -328,10 +328,10 @@ class Solution:
             elif nums[current] < pivot:
                 lo += 1
                 nums[lo], nums[current] = nums[current], nums[lo]
-                current += 1
+                current += 1  # 交换位置后的nums[current]=0; 所以current要加1
             elif nums[current] > pivot:
                 hi -= 1
-                nums[hi], nums[current] = nums[current], nums[hi]
+                nums[hi], nums[current] = nums[current], nums[hi]  # 交换位置后的nums[current]不知道是多少，所以current不变
         return nums
 
 
