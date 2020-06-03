@@ -334,6 +334,28 @@ class Solution:
                 nums[hi], nums[current] = nums[current], nums[hi]  # 交换位置后的nums[current]不知道是多少，所以current不变
         return nums
 
+    @staticmethod
+    def find_sum2(big_num1, big_num2):
+        if len(big_num1) < len(big_num2):
+            big_num1, big_num2 = big_num2, big_num1
+        n1 = len(big_num1)
+        n2 = len(big_num2)
+        diff = n1 - n2
+
+        result = ""
+        carry = 0
+        for i in range(n2-1, -1, -1):
+            n_sum = int(big_num1[i+diff]) + int(big_num2[i]) + carry
+            carry = n_sum // 10
+            result += str(n_sum % 10)
+        for i in range(n1-n2-1, -1, -1):
+            n_sum = int(big_num1[i]) + carry
+            carry = n_sum // 10
+            result += str(n_sum % 10)
+        if carry:
+            result += str(carry)
+        return result[::-1]
+
 
 if __name__ == "__main__":
     # nums_test1 = random.sample(range(-5, 5), 10)
@@ -401,5 +423,9 @@ if __name__ == "__main__":
     # print(Solution().find_index_for_abs1(nums_test, 5))
 
     # 荷兰国旗问题(快排思想)
-    nums_test = [2, 0, 2, 1, 1, 0]
-    print(Solution().sort_colors(nums_test))
+    # nums_test = [2, 0, 2, 1, 1, 0]
+    # print(Solution().sort_colors(nums_test))
+
+    # 大数加法(传统列竖式解法)
+    print(Solution().find_sum2("12345", "987654321"))
+
