@@ -335,7 +335,7 @@ class Solution:
         return nums
 
     @staticmethod
-    def find_sum2(big_num1, big_num2):
+    def find_sum(big_num1, big_num2):
         if len(big_num1) < len(big_num2):
             big_num1, big_num2 = big_num2, big_num1
         n1 = len(big_num1)
@@ -427,5 +427,5 @@ if __name__ == "__main__":
     # print(Solution().sort_colors(nums_test))
 
     # 大数加法(传统列竖式解法)
-    print(Solution().find_sum2("12345", "987654321"))
+    print(Solution().find_sum("12345", "987654321"))
 
