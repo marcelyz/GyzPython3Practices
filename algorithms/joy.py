@@ -47,19 +47,6 @@ class Solution:
             result += str(carry)
         return result[::-1]
 
-    # 链表反转(循环+变量交换)
-    @staticmethod
-    def reverse_linked_list(p_head: LinkedNode):
-        if not p_head or not p_head.next:
-            return p_head
-        reverse_p_head = None
-        while p_head:
-            next_node = p_head.next
-            p_head.next = reverse_p_head
-            reverse_p_head = p_head
-            p_head = next_node
-        return reverse_p_head
-
     # 快速排序(分治+递归)
     @staticmethod
     def partition(nums_list: list, lo: int, hi: int):
@@ -89,6 +76,41 @@ class Solution:
         else:
             return num_list[pivot]
 
+    # todo: 第k大数(类堆排序思想)
+    def find_k_max_heap(self, num_list: list, lo: int, hi: int, k: int):
+        pass
+
+    # 链表反转(循环+变量交换)
+    @staticmethod
+    def reverse_linked_list(p_head: LinkedNode):
+        if not p_head or not p_head.next:
+            return p_head
+        reverse_p_head = None
+        while p_head:
+            next_node = p_head.next
+            p_head.next = reverse_p_head
+            reverse_p_head = p_head
+            p_head = next_node
+        return reverse_p_head
+
+    # 合并两个有序链表(非递归)
+    @staticmethod
+    def merge_2_linked_list(p_head1: LinkedNode, p_head2: LinkedNode):
+        result_p_head = moved_p = LinkedNode(-1)  # 初始化一个-1的链表节点；且申明2个指针，一个用来移动比较，一个用来返回最终的结果
+        while p_head1 and p_head2:
+            if p_head1.val > p_head2.val:
+                moved_p.next = p_head2
+                p_head2 = p_head2.next
+            else:
+                moved_p.next = p_head1
+                p_head1 = p_head1.next
+            moved_p = moved_p.next
+        if p_head1:
+            moved_p.next = p_head1
+        if p_head2:
+            moved_p.next = p_head2
+        return result_p_head.next
+
 
 if __name__ == "__main__":
     solution = Solution()
@@ -96,21 +118,25 @@ if __name__ == "__main__":
     # 大数加法
     # print(solution.big_num_add("12345", "987654321"))
 
+    # 快排
+    # nums = [9, 8, 7, 6, 5, 4, 3, 2, 1]
+    # solution.quick_sort(nums, 0, len(nums))
+    # print(nums)
+
+    # # 第k大数
+    # nums = [9, 8, 7, 6, 5, 4, 3, 2, 1]
+    # print(solution.find_k_max(nums, 0, len(nums), 6))
+
     # 链表反转
     # a = LinkedNode.from_list([3, 4, 5, 6, 7])
     # print(a)
     # b = solution.reverse_linked_list(a)
     # print(b)
 
-    # 快排
-    # nums = [9, 8, 7, 6, 5, 4, 3, 2, 1]
-    # solution.quick_sort(nums, 0, len(nums))
-    # print(nums)
-
-    # 第k大数
-    nums = [9, 8, 7, 6, 5, 4, 3, 2, 1]
-    print(solution.find_k_max(nums, 0, len(nums), 6))
-
+    # 合并两个有序链表
+    a = LinkedNode.from_list([1, 3, 5, 7, 9])
+    b = LinkedNode.from_list([2, 4, 6, 8, 10])
+    print(solution.merge_2_linked_list(a, b))
 
 
 
