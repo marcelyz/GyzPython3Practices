@@ -423,9 +423,5 @@ if __name__ == "__main__":
     # print(Solution().find_index_for_abs1(nums_test, 5))
 
     # 荷兰国旗问题(快排思想)
-    # nums_test = [2, 0, 2, 1, 1, 0]
-    # print(Solution().sort_colors(nums_test))
-
-    # 大数加法(传统列竖式解法)
-    print(Solution().big_num_add("12345", "987654321"))
-
+    nums_test = [2, 0, 2, 1, 1, 0]
+    print(Solution().sort_colors(nums_test))
