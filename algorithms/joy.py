@@ -131,6 +131,36 @@ class LinkedList(LinkedNode):
         return 0
 
 
+class BinaryTree:
+    def __init__(self, key):
+        self.val = key
+        self.left = None
+        self.right = None
+
+    # 二叉树z型遍历(双栈法)
+    @staticmethod
+    def zigzag_traversal(root):
+        ltr_flag = True  # the flag of left to right
+        current_stack = [root]
+        next_stack = []
+        while len(current_stack) > 0:
+            node = current_stack.pop()
+            print(node.val, end=" ")
+            if ltr_flag:
+                if node.left:
+                    next_stack.append(node.left)
+                if node.right:
+                    next_stack.append(node.right)
+            else:
+                if node.right:
+                    next_stack.append(node.right)
+                if node.left:
+                    next_stack.append(node.left)
+            if len(current_stack) == 0:
+                ltr_flag = not ltr_flag
+                next_stack, current_stack = current_stack, next_stack
+
+
 class Solution:
     # 大数加法(循环+进位)
     @staticmethod
@@ -245,4 +275,14 @@ if __name__ == "__main__":
     a = LinkedList.from_loop_list([1, 2, 3, 4, 5, 6, 7, 8, 9], 5)
     print("linked_list a: ", a)
     print("链表的环的长度为", LinkedList.detect_loop(a))
+    print("-" * 100)
+
+    print("二叉树z型遍历")
+    root = BinaryTree(1)
+    root.left = BinaryTree(2)
+    root.right = BinaryTree(3)
+    root.left.left = BinaryTree(4)
+    root.left.right = BinaryTree(5)
+    BinaryTree.zigzag_traversal(root)
+    print()
     print("-" * 100)
