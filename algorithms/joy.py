@@ -106,7 +106,7 @@ class LinkedList(LinkedNode):
         right = LinkedList.merge_k_linked_list(p_head_list[middle:])
         return LinkedList.merge_2_linked_list(left, right)
 
-    # 合并k个有序链表(最小堆)
+    # todo 合并k个有序链表(最小堆)
     @staticmethod
     def merge_k_linked_list_using_min_heap(p_head_list: List[LinkedNode]) -> LinkedNode:
         pass
@@ -192,42 +192,57 @@ class Solution:
 if __name__ == "__main__":
     solution = Solution()
 
-    # 大数加法
-    # print(solution.big_num_add("12345", "987654321"))
+    print("大数加法")
+    a = "12345"
+    b = "987654321"
+    print("{0} + {1} = {2}".format(a, b, solution.big_num_add(a, b)))
+    print("-"*100)
 
-    # 快排
-    # nums = [9, 8, 7, 6, 5, 4, 3, 2, 1]
-    # solution.quick_sort(nums, 0, len(nums))
-    # print(nums)
+    print("快排")
+    nums = [9, 8, 7, 6, 5, 4, 3, 2, 1]
+    print("origin: ", nums)
+    solution.quick_sort(nums, 0, len(nums))
+    print("sorted", nums)
+    print("-" * 100)
 
-    # # 第k大数
-    # nums = [9, 8, 7, 6, 5, 4, 3, 2, 1]
-    # print(solution.find_k_max(nums, 0, len(nums), 6))
+    print("第k大数")
+    nums = [9, 8, 7, 6, 5, 4, 3, 2, 1]
+    print("origin: ", nums)
+    k = 6
+    print("the {0}th max number".format(k), solution.find_k_max(nums, 0, len(nums), k))
+    print("-" * 100)
 
-    # 链表反转
-    # a = LinkedList.from_list([3, 4, 5, 6, 7])
-    # print(a)
-    # b = LinkedList.reverse_linked_list(a)
-    # print(b)
+    print("链表反转")
+    a = LinkedList.from_list([3, 4, 5, 6, 7])
+    print("origin: ", a)
+    b = LinkedList.reverse_linked_list(a)
+    print("reversed: ", b)
+    print("-" * 100)
 
-    # 合并两个有序链表
-    # a = LinkedList.from_list([1, 3, 5, 7, 9])
-    # b = LinkedList.from_list([2, 4, 6, 8, 10])
-    # print("linked_list a: ", a)
-    # print("linked_list b: ", b)
-    # print("非递归版", LinkedList.merge_2_linked_list(a, b))
-    # a = LinkedList.from_list([1, 3, 5, 7, 9])
-    # b = LinkedList.from_list([2, 4, 6, 8, 10])
-    # print("递归版", LinkedList.merge_2_linked_list_recursion(a, b))
+    print("合并两个有序链表")
+    a = LinkedList.from_list([1, 3, 5, 7, 9])
+    b = LinkedList.from_list([2, 4, 6, 8, 10])
+    print("linked_list a: ", a)
+    print("linked_list b: ", b)
+    print("非递归合并", LinkedList.merge_2_linked_list(a, b))
+    a = LinkedList.from_list([1, 3, 5, 7, 9])
+    b = LinkedList.from_list([2, 4, 6, 8, 10])
+    print("递归版合并", LinkedList.merge_2_linked_list_recursion(a, b))
+    print("-" * 100)
 
-    # 合并k个有序链表
+    print("合并k个有序链表")
     a = LinkedList.from_list([1, 3, 5, 7, 9])
     b = LinkedList.from_list([2, 4, 6, 8, 10])
     c = LinkedList.from_list([0, 3, 6, 9, 110])
+    print("linked_list a: ", a)
+    print("linked_list b: ", b)
+    print("linked_list c: ", c)
     abc = [a, b, c]
-    print("归并版：", LinkedList.merge_k_linked_list(abc))
+    print("归并版合并：", LinkedList.merge_k_linked_list(abc))
+    print("-" * 100)
 
-    # 判断链表是否有环；如果有，返回环的长度
-    # a = LinkedList.from_loop_list([1, 2, 3, 4, 5, 6, 7, 8, 9], 5)
-    # print(a)
-    # print("链表的环的长度为", LinkedList.detect_loop(a))
+    print("判断链表是否有环；如果有，返回环的长度")
+    a = LinkedList.from_loop_list([1, 2, 3, 4, 5, 6, 7, 8, 9], 5)
+    print("linked_list a: ", a)
+    print("链表的环的长度为", LinkedList.detect_loop(a))
+    print("-" * 100)
