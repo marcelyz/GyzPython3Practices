@@ -94,8 +94,17 @@ class LinkedList(LinkedNode):
         return result_p_head
 
     # 合并k个有序链表(类归并思想)
-    def merge_k_linked_list(self, p_head_list: List[LinkedNode]) -> LinkedNode:
-        pass
+    @staticmethod
+    def merge_k_linked_list(p_head_list: List[LinkedNode]) -> LinkedNode:
+        length = len(p_head_list)
+        if length == 0:
+            assert "input error"
+        if length == 1:
+            return p_head_list[0]
+        middle = length // 2
+        left = LinkedList.merge_k_linked_list(p_head_list[:middle])
+        right = LinkedList.merge_k_linked_list(p_head_list[middle:])
+        return LinkedList.merge_2_linked_list(left, right)
 
     # 合并k个有序链表(最小堆)
     @staticmethod
@@ -202,14 +211,21 @@ if __name__ == "__main__":
     # print(b)
 
     # 合并两个有序链表
+    # a = LinkedList.from_list([1, 3, 5, 7, 9])
+    # b = LinkedList.from_list([2, 4, 6, 8, 10])
+    # print("linked_list a: ", a)
+    # print("linked_list b: ", b)
+    # print("非递归版", LinkedList.merge_2_linked_list(a, b))
+    # a = LinkedList.from_list([1, 3, 5, 7, 9])
+    # b = LinkedList.from_list([2, 4, 6, 8, 10])
+    # print("递归版", LinkedList.merge_2_linked_list_recursion(a, b))
+
+    # 合并k个有序链表
     a = LinkedList.from_list([1, 3, 5, 7, 9])
     b = LinkedList.from_list([2, 4, 6, 8, 10])
-    print("linked_list a: ", a)
-    print("linked_list b: ", b)
-    print("merge_by_not_recursion", LinkedList.merge_2_linked_list(a, b))
-    a = LinkedList.from_list([1, 3, 5, 7, 9])
-    b = LinkedList.from_list([2, 4, 6, 8, 10])
-    print("merge_by_recursion", LinkedList.merge_2_linked_list_recursion(a, b))
+    c = LinkedList.from_list([0, 3, 6, 9, 110])
+    abc = [a, b, c]
+    print("归并版：", LinkedList.merge_k_linked_list(abc))
 
     # 判断链表是否有环；如果有，返回环的长度
     # a = LinkedList.from_loop_list([1, 2, 3, 4, 5, 6, 7, 8, 9], 5)
