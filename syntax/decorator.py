@@ -16,9 +16,9 @@ def use_logging(func):
 
 # 简单装饰器：
 def _use_logging(func):
-    def wrapper(*args,**kwargs):
+    def wrapper(*args, **kwargs):
         print("%s is running" % func.__name__)
-        return func(*args,**kwargs)
+        return func(*args, **kwargs)
     return wrapper
 
 
