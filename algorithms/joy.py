@@ -78,9 +78,23 @@ class LinkedList(LinkedNode):
             moved_p.next = p_head2
         return result_p_head.next
 
-    # 合并k个有序链表(类归并思想)
+    # 合并两个有序链表(递归)
     @staticmethod
-    def merge_k_linked_list(p_head_list: List[LinkedNode]) -> LinkedNode:
+    def merge_2_linked_list_recursion(p_head1: LinkedNode, p_head2: LinkedNode) -> LinkedNode:
+        if p_head1 is None:
+            return p_head2
+        if p_head2 is None:
+            return p_head1
+        if p_head1.val < p_head2.val:
+            result_p_head = p_head1
+            result_p_head.next = LinkedList.merge_2_linked_list_recursion(p_head1.next, p_head2)
+        else:
+            result_p_head = p_head2
+            result_p_head.next = LinkedList.merge_2_linked_list_recursion(p_head1, p_head2.next)
+        return result_p_head
+
+    # 合并k个有序链表(类归并思想)
+    def merge_k_linked_list(self, p_head_list: List[LinkedNode]) -> LinkedNode:
         pass
 
     # 合并k个有序链表(最小堆)
@@ -154,12 +168,12 @@ class Solution:
     # 第k大数(类快排思想)
     def find_k_max(self, num_list: list, lo: int, hi: int, k: int):
         pivot = self.partition(num_list, lo, hi)
-        if pivot < k-1:
-            return self.find_k_max(num_list, pivot, hi, k)  # 注意加return !!!
-        elif pivot > k-1:
-            return self.find_k_max(num_list, lo, pivot, k)  # 注意加return !!!
-        else:
+        if pivot == k-1:
             return num_list[pivot]
+        elif pivot < k-1:
+            return self.find_k_max(num_list, pivot, hi, k)  # 注意加return !!!
+        else:
+            return self.find_k_max(num_list, lo, pivot, k)  # 注意加return !!!
 
     # todo: 第k大数(最小堆)
     def find_k_max_using_min_heap(self, num_list: list, lo: int, hi: int, k: int):
@@ -188,11 +202,16 @@ if __name__ == "__main__":
     # print(b)
 
     # 合并两个有序链表
-    # a = LinkedList.from_list([1, 3, 5, 7, 9])
-    # b = LinkedList.from_list([2, 4, 6, 8, 10])
-    # print(LinkedList.merge_2_linked_list(a, b))
+    a = LinkedList.from_list([1, 3, 5, 7, 9])
+    b = LinkedList.from_list([2, 4, 6, 8, 10])
+    print("linked_list a: ", a)
+    print("linked_list b: ", b)
+    print("merge_by_not_recursion", LinkedList.merge_2_linked_list(a, b))
+    a = LinkedList.from_list([1, 3, 5, 7, 9])
+    b = LinkedList.from_list([2, 4, 6, 8, 10])
+    print("merge_by_recursion", LinkedList.merge_2_linked_list_recursion(a, b))
 
     # 判断链表是否有环；如果有，返回环的长度
-    a = LinkedList.from_loop_list([1, 2, 3, 4, 5, 6, 7, 8, 9], 5)
-    print(a)
-    print("链表的环的长度为", LinkedList.detect_loop(a))
+    # a = LinkedList.from_loop_list([1, 2, 3, 4, 5, 6, 7, 8, 9], 5)
+    # print(a)
+    # print("链表的环的长度为", LinkedList.detect_loop(a))
