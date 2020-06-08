@@ -1,3 +1,6 @@
+from typing import List
+
+
 class LinkedNode:
     def __init__(self, x: int):
         self.val = x
@@ -9,6 +12,8 @@ class LinkedNode:
         while node:
             result += str(node.val)
             node = node.next
+            if len(result) > 100:  # 防止有环链表导致死循环
+                break
             if node:
                 result += " -> "
         return result
@@ -17,7 +22,7 @@ class LinkedNode:
 class LinkedList(LinkedNode):
     # 从list创建linked list
     @classmethod
-    def from_list(cls, lst: list):
+    def from_list(cls, lst: list) -> LinkedNode:
         linked_list_head = None
         for i in range(len(lst)-1, -1, -1):
             node = cls(lst[i])
@@ -27,7 +32,7 @@ class LinkedList(LinkedNode):
 
     # 从list创建linked loop list
     @classmethod
-    def from_loop_list(cls, lst: list, cycle_index: int):
+    def from_loop_list(cls, lst: list, cycle_index: int) -> LinkedNode:
         linked_cycle_list_head = None
         loop_node_head = None
         last_node = None
@@ -44,7 +49,7 @@ class LinkedList(LinkedNode):
 
     # 链表反转(循环+变量交换)
     @staticmethod
-    def reverse_linked_list(p_head: LinkedNode):
+    def reverse_linked_list(p_head: LinkedNode) -> LinkedNode:
         if not p_head or not p_head.next:
             return p_head
         reverse_p_head = None
@@ -57,7 +62,7 @@ class LinkedList(LinkedNode):
 
     # 合并两个有序链表(非递归)
     @staticmethod
-    def merge_2_linked_list(p_head1: LinkedNode, p_head2: LinkedNode):
+    def merge_2_linked_list(p_head1: LinkedNode, p_head2: LinkedNode) -> LinkedNode:
         result_p_head = moved_p = LinkedNode(-1)  # 初始化一个-1的链表节点；且申明2个指针，一个用来移动比较，一个用来返回最终的结果
         while p_head1 and p_head2:
             if p_head1.val > p_head2.val:
@@ -73,9 +78,19 @@ class LinkedList(LinkedNode):
             moved_p.next = p_head2
         return result_p_head.next
 
+    # 合并k个有序链表(类归并思想)
+    @staticmethod
+    def merge_k_linked_list(p_head_list: List[LinkedNode]) -> LinkedNode:
+        pass
+
+    # 合并k个有序链表(最小堆)
+    @staticmethod
+    def merge_k_linked_list_using_min_heap(p_head_list: List[LinkedNode]) -> LinkedNode:
+        pass
+
     # 判断链表是否有环；如果有，返回环的长度(快慢指针)
     @staticmethod
-    def detect_loop(p_head: LinkedNode):
+    def detect_loop(p_head: LinkedNode) -> int:
         if p_head is None or p_head.next is None:
             return 0
         slow = p_head.next
@@ -96,7 +111,7 @@ class LinkedList(LinkedNode):
 class Solution:
     # 大数加法(循环+进位)
     @staticmethod
-    def big_num_add(big_num1: str, big_num2: str):
+    def big_num_add(big_num1: str, big_num2: str) -> str:
         if len(big_num1) < len(big_num2):
             big_num1, big_num2 = big_num2, big_num1
         n1 = len(big_num1)
@@ -119,7 +134,7 @@ class Solution:
 
     # 快速排序(分治+递归)
     @staticmethod
-    def partition(nums_list: list, lo: int, hi: int):
+    def partition(nums_list: list, lo: int, hi: int) -> int:
         threshold = lo - 1
         pivot = nums_list[hi-1]
         for i in range(lo, hi):
@@ -146,8 +161,8 @@ class Solution:
         else:
             return num_list[pivot]
 
-    # todo: 第k大数(类堆排序思想)
-    def find_k_max_heap(self, num_list: list, lo: int, hi: int, k: int):
+    # todo: 第k大数(最小堆)
+    def find_k_max_using_min_heap(self, num_list: list, lo: int, hi: int, k: int):
         pass
 
 
@@ -179,7 +194,5 @@ if __name__ == "__main__":
 
     # 判断链表是否有环；如果有，返回环的长度
     a = LinkedList.from_loop_list([1, 2, 3, 4, 5, 6, 7, 8, 9], 5)
-    for i in range(13):  # 打印有环链表
-        print(a.val)
-        a = a.next
+    print(a)
     print("链表的环的长度为", LinkedList.detect_loop(a))

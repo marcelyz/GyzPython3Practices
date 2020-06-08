@@ -67,6 +67,32 @@ class Solution:
         merged.extend(right)
         return merged
 
+    # 堆排序
+    @staticmethod
+    def heap_sort(lst):
+        def sift_down(start, end):
+            """最大堆调整"""
+            root = start
+            while True:
+                child = 2 * root + 1
+                if child > end:
+                    break
+                if child + 1 <= end and lst[child] < lst[child + 1]:
+                    child += 1
+                if lst[root] < lst[child]:
+                    lst[root], lst[child] = lst[child], lst[root]
+                    root = child
+                else:
+                    break
+        # 创建最大堆
+        for s in range((len(lst) - 2) // 2, -1, -1):
+            sift_down(s, len(lst) - 1)
+        # 堆排序
+        for e in range(len(lst) - 1, 0, -1):
+            lst[0], lst[e] = lst[e], lst[0]
+            sift_down(0, e - 1)
+        return lst
+
     @staticmethod
     def max_sub_array(nums):
         """
@@ -358,7 +384,7 @@ class Solution:
 
 
 if __name__ == "__main__":
-    # nums_test1 = random.sample(range(-5, 5), 10)
+    nums_test1 = random.sample(range(-5, 5), 10)
     # nums_test2 = random.sample(range(-5, 5), 8)
     # print("nums_test1:", nums_test1)
     # print("nums_test2:", nums_test2)
@@ -371,7 +397,10 @@ if __name__ == "__main__":
     # print("quick_sort:", nums_test1)
     #
     # 归并排序
-    # print("merge_sort:", Solution().merge_sort(nums_test1))
+    print("merge_sort:", Solution().merge_sort(nums_test1))
+
+    # 堆排序
+    print("heap_sort:", Solution().heap_sort(nums_test1))
     #
     # 两个有序数组的中位数
     # num_median = Solution().find_median_sorted_arrays(nums_test1, nums_test2)
