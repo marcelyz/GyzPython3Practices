@@ -160,6 +160,30 @@ class BinaryTree:
                 ltr_flag = not ltr_flag
                 next_stack, current_stack = current_stack, next_stack
 
+    # 二叉树最大深度(递归)
+    @staticmethod
+    def max_tree_depth(root):
+        if root is None:
+            return 0
+        left_depth = BinaryTree.max_tree_depth(root.left)
+        right_depth = BinaryTree.max_tree_depth(root.right)
+        if left_depth > right_depth:
+            return left_depth + 1
+        else:
+            return right_depth + 1
+
+    # 二叉树最小深度(递归)
+    @staticmethod
+    def min_tree_depth(root):
+        if root is None:
+            return 0
+        left_depth = BinaryTree.min_tree_depth(root.left)
+        right_depth = BinaryTree.min_tree_depth(root.right)
+        if left_depth > right_depth:
+            return right_depth + 1
+        else:
+            return left_depth + 1
+
 
 class Solution:
     # 大数加法(循环+进位)
@@ -285,4 +309,12 @@ if __name__ == "__main__":
     root.left.right = BinaryTree(5)
     BinaryTree.zigzag_traversal(root)
     print()
+    print("-" * 100)
+
+    print("二叉树最大深度")
+    print(BinaryTree.max_tree_depth(root))
+    print("-" * 100)
+
+    print("二叉树最小深度")
+    print(BinaryTree.min_tree_depth(root))
     print("-" * 100)
