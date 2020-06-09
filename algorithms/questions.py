@@ -281,10 +281,6 @@ class Solution:
             return s_string[left:right]
 
     @staticmethod
-    def is_binary_search_tree(root):
-        pass
-
-    @staticmethod
     def binary_search(nums, target):
         # 有序数组
         lo = 0
@@ -385,71 +381,68 @@ class Solution:
 
 if __name__ == "__main__":
     nums_test1 = random.sample(range(-5, 5), 10)
-    # nums_test2 = random.sample(range(-5, 5), 8)
-    # print("nums_test1:", nums_test1)
-    # print("nums_test2:", nums_test2)
+    nums_test2 = random.sample(range(-5, 5), 8)
+    print("nums_test1:", nums_test1)
+    print("nums_test2:", nums_test2)
 
     # 最大子列和
-    # print("max_sub_array:", Solution().max_sub_array(nums_test1))
-    #
+    print("max_sub_array:", Solution().max_sub_array(nums_test1))
+
     # 快速排序
-    # Solution().quick_sort(nums_test1, 0, len(nums_test1))
-    # print("quick_sort:", nums_test1)
-    #
+    Solution().quick_sort(nums_test1, 0, len(nums_test1))
+    print("quick_sort:", nums_test1)
+
     # 归并排序
     print("merge_sort:", Solution().merge_sort(nums_test1))
 
     # 堆排序
     print("heap_sort:", Solution().heap_sort(nums_test1))
-    #
+
     # 两个有序数组的中位数
-    # num_median = Solution().find_median_sorted_arrays(nums_test1, nums_test2)
-    # print("median of two sorted arrays:", num_median)
-    #
+    num_median = Solution().find_median_sorted_arrays(nums_test1, nums_test2)
+    print("median of two sorted arrays:", num_median)
+
     # 数组中第二大的数
-    # num_second_max = Solution().find_second_max_num(nums_test1)
-    # print("num_second_max", num_second_max)
-    #
+    num_second_max = Solution().find_second_max_num(nums_test1)
+    print("num_second_max", num_second_max)
+
     # 抢房子
-    # house_rob_result = Solution().house_rob(nums_test1)
-    # print("house_rob_result", house_rob_result)
-    #
+    house_rob_result = Solution().house_rob(nums_test1)
+    print("house_rob_result", house_rob_result)
+
     # two sum
-    # target_sum = 5
-    # two_sum_result = Solution().two_sum(nums_test1, target_sum)
-    # print("two_sum_result", two_sum_result)
+    target_sum = 5
+    two_sum_result = Solution().two_sum(nums_test1, target_sum)
+    print("two_sum_result", two_sum_result)
 
     # 数组中的最大值最小值，1.5N次比较(新氧)
-    # min_max = Solution().find_nums_min_and_max(nums_test1)
-    # print("find_nums_min_and_max:", min_max)
+    min_max = Solution().find_nums_min_and_max(nums_test1)
+    print("find_nums_min_and_max:", min_max)
 
     # 股票利益最大化问题(新氧)
-    # stocks = [("2019-07-01", 1), ("2019-07-02", 3), ("2019-07-04", 5), ("2019-07-05", 1), ("2019-07-09", 10)]
-    # print(Solution().stock_max_profit(stocks))
+    stocks = [("2019-07-01", 1), ("2019-07-02", 3), ("2019-07-04", 5), ("2019-07-05", 1), ("2019-07-09", 10)]
+    print(Solution().stock_max_profit(stocks))
 
     # 最小覆盖子串（双指针+滑动窗口）
-    # S = "ADOBECODEBANC"
-    # T = "ABC"
-    # print(Solution().min_window(S, T))
-
-    # 二叉搜索树(zhihu)
-    # pass
+    S = "ADOBECODEBANC"
+    T = "ABC"
+    print(Solution().min_window(S, T))
 
     # 有序数组二分查找
-    # nums_test = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    # print(Solution().binary_search(nums_test, 6))
+    nums_test = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    print(Solution().binary_search(nums_test, 6))
 
     # 半有序数组二分查找(metaapp)
-    # nums_test = [6, 7, 8, 9, 1, 2, 3, 4, 5]
-    # print(Solution().binary_search_for_half_sequence(nums_test, 8))
+    nums_test = [6, 7, 8, 9, 1, 2, 3, 4, 5]
+    print(Solution().binary_search_for_half_sequence(nums_test, 8))
 
     # 先升序后降序数组二分查找
-    # nums_test = [3, 5, 7, 8, 4, 2, 1]
-    # print(Solution().binary_search_for_half_sequence2(nums_test, 8))
+    nums_test = [3, 5, 7, 8, 4, 2, 1]
+    print(Solution().binary_search_for_half_sequence2(nums_test, 8))
 
     # 在相邻元素绝对值为1的数组查找元素index
-    # nums_test = [4, 3, 2, 1, 2, 3, 4, 5, 6, 7]
-    # print(Solution().find_index_for_abs1(nums_test, 5))
+    nums_test = [4, 3, 2, 1, 2, 3, 4, 5, 6, 7]
+    print(Solution().find_index_for_abs1(nums_test, 5))
 
     # 荷兰国旗问题(快排思想)
     nums_test = [2, 0, 2, 1, 1, 0]

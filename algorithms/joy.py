@@ -184,6 +184,17 @@ class BinaryTree:
         else:
             return left_depth + 1
 
+    # 是否是二叉搜索树/(递归)
+    @staticmethod
+    def is_binary_search_tree(root):
+        if root is None:
+            return True
+        if root.val > root.left.val:
+            return False
+        if root.val < root.right.val:
+            return False
+        return BinaryTree.is_binary_search_tree(root.left) and BinaryTree.is_binary_search_tree(root.right)
+
 
 class Solution:
     # 大数加法(循环+进位)
@@ -317,4 +328,8 @@ if __name__ == "__main__":
 
     print("二叉树最小深度")
     print(BinaryTree.min_tree_depth(root))
+    print("-" * 100)
+
+    print("是否是二叉搜索树")
+    print(BinaryTree.is_binary_search_tree(root))
     print("-" * 100)
